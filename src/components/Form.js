@@ -12,14 +12,43 @@ class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
     } = this.props;
+
+    const superTrunfo = () => {
+      if (hasTrunfo === false) {
+        return (
+          <label htmlFor="trunfo-input">
+            Super Trunfo?
+            {' '}
+            <input
+              type="checkbox"
+              name="cardTrunfo"
+              data-testid="trunfo-input"
+              checked={ cardTrunfo }
+              onChange={ onInputChange }
+            />
+            <p />
+          </label>
+        );
+      }
+      return (
+        <span>
+          Você já tem um Super Trunfo em seu baralho
+          <p />
+        </span>
+      );
+    };
     return (
       <form>
         <label htmlFor="text">
+          <br />
           <input
+            placeholder="Nome"
+            name="cardName"
             id="text"
             type="text"
             data-testid="name-input"
@@ -27,8 +56,12 @@ class Form extends React.Component {
             onChange={ onInputChange }
           />
         </label>
+        <br />
         <label htmlFor="textarea">
+          <br />
           <input
+            placeholder="informacoes"
+            name="cardDescription"
             id="textarea"
             type="textarea"
             data-testid="description-input"
@@ -36,17 +69,25 @@ class Form extends React.Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="number1">
+        <br />
+        <label htmlFor="number">
+          <br />
           <input
-            id="number1"
+            placeholder="Attack"
+            name="cardAttr1"
+            id="number"
             type="number"
             data-testid="attr1-input"
             value={ cardAttr1 }
             onChange={ onInputChange }
           />
         </label>
+        <br />
         <label htmlFor="number2">
+          <br />
           <input
+            placeholder="Defesa"
+            name="cardAttr2"
             id="number2"
             type="number"
             data-testid="attr2-input"
@@ -54,8 +95,12 @@ class Form extends React.Component {
             onChange={ onInputChange }
           />
         </label>
+        <br />
         <label htmlFor="number3">
+          <br />
           <input
+            placeholder="Especial"
+            name="cardAttr3"
             id="number3"
             type="number"
             data-testid="attr3-input"
@@ -63,44 +108,46 @@ class Form extends React.Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="img">
+        <br />
+        <label htmlFor="image">
+          <br />
           <input
-            id="img"
-            type="img"
+            placeholder="Imagem"
+            name="cardImage"
+            id="image"
+            type="text1"
             data-testid="image-input"
             value={ cardImage }
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="select">
+        <br />
+        <label htmlFor="rare">
+          Raridade:
           <select
-            id="select"
-            type="select"
+            id="rare"
+            name="cardRare"
             data-testid="rare-input"
             value={ cardRare }
             onChange={ onInputChange }
           >
-            <option>normal</option>
-            <option>raro</option>
-            <option>muito raro</option>
+            <option value="normal">normal</option>
+            <option value="raro">raro</option>
+            <option value="muito raro">muito raro</option>
           </select>
         </label>
-        <label htmlFor="check">
-          <input
-            id="check"
-            type="checkbox"
-            data-testid="trunfo-input"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-          />
-        </label>
+        <br />
+        { superTrunfo() }
+        <br />
+        <br />
         <button
-          type="submit"
+          id="botao"
           data-testid="save-button"
+          type="submit"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }
         >
-          Salvar
+          salvar
         </button>
       </form>
     );
@@ -116,6 +163,7 @@ Form.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,

@@ -13,17 +13,34 @@ class Card extends React.Component {
       cardRare,
       cardTrunfo,
     } = this.props;
+    const trunfoCheck = () => {
+      if (cardTrunfo) {
+        return (
+          <p
+            name="cardTrunfo"
+            data-testid="trunfo-card"
+          >
+            Super Trunfo
+          </p>
+        );
+      }
+    };
     return (
-      <>
-        <section data-testid="name-card">{ cardName }</section>
-        <img data-testid="image-card" src={ cardImage } alt={ cardName } />
-        <section data-testid="description-card">{ cardDescription }</section>
-        <section data-testid="attr1-card">{ cardAttr1 }</section>
-        <section data-testid="attr2-card">{ cardAttr2 }</section>
-        <section data-testid="attr3-card">{ cardAttr3 }</section>
-        <section data-testid="rare-card">{ cardRare }</section>
-        {cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p>}
-      </>
+      <div>
+        <p name="cardName" data-testid="name-card">{ cardName }</p>
+        <img
+          name="cardImage"
+          data-testid="image-card"
+          src={ cardImage }
+          alt={ cardName }
+        />
+        <p name="cardDescription" data-testid="description-card">{ cardDescription }</p>
+        <p name="cardAttr1" data-testid="attr1-card">{ cardAttr1 }</p>
+        <p name="cardAttr2" data-testid="attr2-card">{ cardAttr2 }</p>
+        <p name="cardAttr3" data-testid="attr3-card">{ cardAttr3 }</p>
+        <p name="cardRare" data-testid="rare-card">{ cardRare }</p>
+        { trunfoCheck() }
+      </div>
     );
   }
 }
@@ -36,7 +53,7 @@ Card.propTypes = {
   cardAttr3: PropTypes.string.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
-  cardTrunfo: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
 };
 
 export default Card;
